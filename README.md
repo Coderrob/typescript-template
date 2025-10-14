@@ -116,6 +116,8 @@ template provides:
 │   │   ├── filters/        # Log filtering system
 │   │   └── types.ts        # Type definitions
 │   └── __tests__/          # Comprehensive test suite
+│       ├── jest.setup.ts   # Jest globals setup for ESM
+│       └── loggers/        # Logger implementation tests
 ├── .editorconfig           # Editor configuration for consistent coding styles
 ├── .gitignore              # Git ignore patterns
 ├── .gitattributes          # Git attributes
@@ -141,7 +143,7 @@ template provides:
 ### Prerequisites
 
 - **Node.js 20+** (specified in `.nvmrc`)
-- **Yarn 4.x** (managed via Corepack)
+- **Yarn 4.5.3** (managed via Corepack)
 
 ### Setup Your Development Environment
 
@@ -246,7 +248,7 @@ This uses Rollup to create an optimized bundle in `dist/`.
 The repository includes a comprehensive CI/CD workflow:
 
 - **CI Pipeline** (`.github/workflows/ci.yml`):
-  - Runs on multiple Node.js versions
+  - Runs on Node.js 20 with Ubuntu latest
   - Executes linting, type checking, and tests
   - Generates coverage reports
   - Builds production bundles
@@ -256,7 +258,7 @@ The repository includes a comprehensive CI/CD workflow:
 
 Edit `.github/workflows/ci.yml` to adjust:
 
-- Node.js versions to test against
+- Node.js version (currently set to 20)
 - Additional build steps
 - Deployment configurations
 - Quality gate thresholds
@@ -304,6 +306,8 @@ Code formatting with Prettier (`.prettierrc.yml`):
 Testing framework setup (`jest.config.cjs`):
 
 - TypeScript support via `ts-jest`
+- ESM module support with experimental VM modules
+- Jest globals injection via setup file (`src/__tests__/jest.setup.ts`)
 - Coverage thresholds and reporting
 - Module path mapping
 - Test environment: Node.js
