@@ -284,9 +284,11 @@ The template includes two TypeScript configurations:
 Modern ESLint flat configuration (`eslint.config.mjs`) with:
 
 - **TypeScript Integration**: Full type-aware linting with strict rules
-- **SonarJS Static Analysis**: Security patterns, complexity limits, code smells
+- **SonarJS Static Analysis**: Comprehensive static code analysis with security
+  patterns, extremely low complexity limits, and code quality rules
 - **Import Organization**: Automatic import sorting and organization
-- **Complexity Monitoring**: Cyclomatic complexity limits (fails at >10)
+- **Complexity Monitoring**: Extremely low cyclomatic complexity limits (fails
+  at >5) and cognitive complexity (fails at >8)
 - **Jest Support**: Test-specific rules and globals
 - **Prettier Integration**: Seamless code formatting
 
@@ -379,7 +381,8 @@ The template includes example code that you can:
 
 ### Quality Tools
 
-- **SonarJS**: Static code analysis and security patterns
+- **SonarJS**: Comprehensive static code analysis with security patterns,
+  extremely low complexity limits, and code quality rules
 - **JSCPD**: Code duplication detection
 - **Madge**: Circular dependency checking
 - **make-coverage-badge**: Automatic coverage badges

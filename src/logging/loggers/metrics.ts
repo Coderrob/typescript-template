@@ -142,21 +142,46 @@ export class MetricsLogger implements ILogger {
     message?: string,
     metadata?: ILogMetadata
   ): void {
+    this.incrementTotalLogs();
+    this.updateLogsByLevel(level);
+    this.updateLogSize(message, metadata);
+    this.updateLevelMetrics(level);
+    this.updateLogTimestamps();
+  }
+
+  /**
+   * Increment the total logs counter.
+   */
+  private incrementTotalLogs(): void {
     this.metrics.totalLogs++;
+  }
+
+  /**
+   * Update the logs by level counter.
+   */
+  private updateLogsByLevel(level: string): void {
     this.metrics.logsByLevel[level] =
       (this.metrics.logsByLevel[level] || 0) + 1;
+  }
 
-    // Calculate log size
+  /**
+   * Update the total log size.
+   */
+  private updateLogSize(message?: string, metadata?: ILogMetadata): void {
     const logSize =
       (message?.length || 0) + (metadata ? JSON.stringify(metadata).length : 0);
     this.totalLogSize += logSize;
+  }
 
-    this.updateLevelMetrics(level);
-
+  /**
+   * Update timestamp metrics for logging.
+   */
+  private updateLogTimestamps(): void {
+    const now = Date.now();
     if (!this.metrics.firstLogTime) {
-      this.metrics.firstLogTime = Date.now();
+      this.metrics.firstLogTime = now;
     }
-    this.metrics.lastLogTime = Date.now();
+    this.metrics.lastLogTime = now;
     this.updateMetrics();
   }
 
@@ -165,24 +190,23 @@ export class MetricsLogger implements ILogger {
    * @param level - The log level.
    */
   private updateLevelMetrics(level: string): void {
-    switch (level as LogLevel) {
-      case LogLevel.INFO:
-        this.metrics.infoLogs++;
-        break;
-      case LogLevel.DEBUG:
-        this.metrics.debugLogs++;
-        break;
-      case LogLevel.WARNING:
+    const metricMap: Record<string, () => void> = {
+      [LogLevel.INFO]: () => this.metrics.infoLogs++,
+      [LogLevel.DEBUG]: () => this.metrics.debugLogs++,
+      [LogLevel.WARNING]: () => {
         this.metrics.warnings++;
         this.metrics.warningLogs++;
-        break;
-      case LogLevel.ERROR:
+      },
+      [LogLevel.ERROR]: () => {
         this.metrics.errors++;
         this.metrics.errorLogs++;
-        break;
-      case LogLevel.FAILED:
-        this.metrics.failedLogs++;
-        break;
+      },
+      [LogLevel.FAILED]: () => this.metrics.failedLogs++
+    };
+
+    const updateFn = metricMap[level as LogLevel];
+    if (updateFn) {
+      updateFn();
     }
   }
 

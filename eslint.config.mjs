@@ -77,15 +77,20 @@ export default [
       ...js.configs.recommended.rules,
 
       // Complexity rules (fail build on high complexity)
-      complexity: ['error', { max: 10 }],
+      complexity: ['error', { max: 5 }],
 
       // SonarJS rules for static analysis (selective adoption)
-      'sonarjs/cognitive-complexity': ['error', 15],
+      'sonarjs/cognitive-complexity': ['error', 8],
       'sonarjs/no-duplicate-string': ['error', { threshold: 3 }],
       'sonarjs/no-identical-functions': 'error',
       'sonarjs/prefer-immediate-return': 'error',
       'sonarjs/pseudo-random': 'warn',
       'sonarjs/publicly-writable-directories': 'warn',
+      'sonarjs/no-inverted-boolean-check': 'error',
+      'sonarjs/no-redundant-boolean': 'error',
+      'sonarjs/no-unused-collection': 'error',
+      'sonarjs/no-collapsible-if': 'error',
+      'sonarjs/prefer-single-boolean-return': 'error',
 
       // TypeScript ESLint rules
       'no-unused-vars': 'off',
