@@ -15,8 +15,6 @@
  *
  */
 
-import { jest } from '@jest/globals';
-
 import { LogLevel, MockLogger } from '../../logging/index.js';
 
 describe('MockLogger', () => {

@@ -29,7 +29,7 @@ module.exports = {
   },
   preset: 'ts-jest',
   reporters: ['default'],
-  setupFilesAfterEnv: [],
+  setupFilesAfterEnv: ['<rootDir>/src/__tests__/jest.setup.ts'],
   testEnvironment: 'node',
   testMatch: ['**/*.test.ts', '**/*.test.js'],
   testPathIgnorePatterns: ['/dist/', '/node_modules/', '/__mocks__/'],

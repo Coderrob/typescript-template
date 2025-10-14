@@ -15,8 +15,6 @@
  *
  */
 
-import { jest } from '@jest/globals';
-
 import {
   IPinoLoggerConfig,
   LoggerConfigResolver,

@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import { jest } from '@jest/globals';
-
 import { LogFilters, LogLevel } from '../../logging/index.js';
 
 describe('LogFilters', () => {
