@@ -1,12 +1,11 @@
 # See: https://github.com/DavidAnson/markdownlint
 
+# Disable line length checking (prettier handles this)
+MD013: false
+
 # Unordered list style
 MD004:
   style: dash
-
-# Disable line length for tables
-MD013:
-  tables: false
 
 # Ordered list item prefix
 MD029:
