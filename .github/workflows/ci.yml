@@ -44,6 +44,10 @@ jobs:
         id: enable-corepack
         run: corepack enable
 
+      - name: Prepare Yarn
+        id: prepare-yarn
+        run: corepack prepare
+
       - name: Install Dependencies
         id: install-dependencies
         run: yarn install
@@ -90,6 +94,10 @@ jobs:
         id: enable-corepack
         run: corepack enable
 
+      - name: Prepare Yarn
+        id: prepare-yarn
+        run: corepack prepare
+
       - name: Install Dependencies
         id: install-dependencies
         run: yarn install
@@ -120,6 +128,10 @@ jobs:
       - name: Enable Corepack
         id: enable-corepack
         run: corepack enable
+
+      - name: Prepare Yarn
+        id: prepare-yarn
+        run: corepack prepare
 
       - name: Install Dependencies
         id: install-dependencies
