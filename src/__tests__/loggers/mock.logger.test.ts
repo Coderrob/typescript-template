@@ -88,7 +88,7 @@ describe('MockLogger', () => {
   describe('group', () => {
     it('should handle group operations successfully', async () => {
       const mockFn = jest
-        .fn<() => Promise<string>>()
+        .fn<Promise<string>, []>()
         .mockResolvedValue('success');
       const result = await mockLogger.group('test group', mockFn);
 
@@ -100,7 +100,7 @@ describe('MockLogger', () => {
 
     it('should handle group operations with errors', async () => {
       const mockFn = jest
-        .fn<() => Promise<string>>()
+        .fn<Promise<string>, []>()
         .mockRejectedValue(new Error('test error'));
 
       await expect(mockLogger.group('test group', mockFn)).rejects.toThrow(

@@ -81,9 +81,7 @@ describe('MetricsLogger', () => {
 
   describe('group', () => {
     it('should record grouped operations', async () => {
-      const mockFn = jest
-        .fn<() => Promise<string>>()
-        .mockResolvedValue('result');
+      const mockFn = jest.fn<Promise<string>, []>().mockResolvedValue('result');
       await metricsLogger.group('test group', mockFn);
 
       const metrics = metricsLogger.getMetrics();

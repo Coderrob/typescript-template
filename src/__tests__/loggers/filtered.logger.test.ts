@@ -198,9 +198,7 @@ describe('FilteredLogger', () => {
 
   describe('group', () => {
     it('should delegate group operations to wrapped logger', async () => {
-      const mockFn = jest
-        .fn<() => Promise<string>>()
-        .mockResolvedValue('result');
+      const mockFn = jest.fn<Promise<string>, []>().mockResolvedValue('result');
 
       const result = await filteredLogger.group('test group', mockFn);
 
