@@ -37,8 +37,8 @@ template provides:
   injection patterns
 - **📊 Quality Gates**: Duplicate code detection, circular dependency checking
 - **🛡️ Security**: SonarJS security patterns and vulnerability detection
-- **🔧 Developer Experience**: EditorConfig, VS Code settings, and development
-  container support
+- **🔧 Developer Experience**: EditorConfig, Visual Studio Code settings, and
+  development container support
 - **📋 CI/CD Ready**: Pre-configured GitHub Actions workflows with automated
   quality checks
 - **🎓 Learning Resource**: Well-documented examples of TypeScript best
@@ -79,8 +79,8 @@ template provides:
    - Update `repository`, `bugs`, and `homepage` URLs
    - Modify `keywords` to match your project
 
-2. **Update `README.md`**:
-   - Replace this README with your project's documentation
+2. **Update `readme`**:
+   - Replace this readme with your project's documentation
    - Update badges with your repository information
 
 3. **Configure licensing**:
@@ -122,12 +122,12 @@ template provides:
 ├── .gitignore              # Git ignore patterns
 ├── .gitattributes          # Git attributes
 ├── .jscpd.json            # Code duplication detection configuration
-├── .markdown-lint.yml      # Markdown linting rules
+├── .markdown-lint.yml      # Markdown linter rules
 ├── .npmignore              # NPM publish ignore patterns
 ├── .nvmrc                  # Node.js version specification
 ├── .prettierignore         # Prettier ignore patterns
 ├── .prettierrc.yml         # Prettier code formatting configuration
-├── .yaml-lint.yml          # YAML linting rules
+├── .yaml-lint.yml          # YAML file linter rules                   |
 ├── CODEOWNERS              # Code ownership and review assignments
 ├── eslint.config.mjs       # Modern ESLint flat configuration
 ├── jest.config.cjs         # Jest testing configuration
@@ -178,7 +178,7 @@ template provides:
 | `yarn all`           | 🚀 Complete pipeline: lint:fix → quality → test → package |
 | `yarn typecheck`     | 📋 TypeScript type checking without emit                  |
 | `yarn lint`          | 🔍 Run Prettier and ESLint validation                     |
-| `yarn lint:fix`      | 🎨 Auto-format and fix code issues                        |
+| `yarn lint:fix`      | 🎨 autoformat and fix code issues                         |
 | `yarn quality`       | 📊 Run quality gates: lint + duplication + circular deps  |
 | `yarn test`          | 🧪 Run Jest tests with coverage reporting                 |
 | `yarn coverage`      | 📈 Generate coverage badge                                |
@@ -271,7 +271,7 @@ The template includes two TypeScript configurations:
 
 - **`tsconfig.json`**: Production configuration for building
   - Strict type checking enabled
-  - ES2022 target and module format
+  - ECMAScript 2022 target and module format
   - Path aliases supported (`@/*` → `src/*`)
 
 - **`tsconfig.test.json`**: Test environment configuration
@@ -331,10 +331,10 @@ Production bundling (`rollup.config.js`):
 | `.editorconfig`      | Consistent editor settings across IDEs    |
 | `.gitignore`         | Git ignore patterns for Node.js projects  |
 | `.jscpd.json`        | Code duplication detection (1% threshold) |
-| `.markdown-lint.yml` | Markdown linting rules                    |
+| `.markdown-lint.yml` | Markdown linter rules                     |
 | `.nvmrc`             | Node.js version specification (20)        |
 | `.prettierignore`    | Files to exclude from formatting          |
-| `.yaml-lint.yml`     | YAML file linting rules                   |
+| `.yaml-lint.yml`     | YAML file linter rules                    |
 | `CODEOWNERS`         | Code ownership and review assignments     |
 
 ## 🏗️ Architecture
@@ -387,7 +387,7 @@ The template includes example code that you can:
 - **Madge**: Circular dependency checking
 - **make-coverage-badge**: Automatic coverage badges
 
-### VS Code Integration
+### Visual Studio Code Integration
 
 - Workspace settings for consistent development
 - Recommended extensions

@@ -63,7 +63,7 @@ Ready to contribute code?
 
    Use [Conventional Commits](https://www.conventionalcommits.org/) format:
    - `feat:` - New features
-   - `fix:` - Bug fixes
+   - `fix:` - bugfixes
    - `docs:` - Documentation changes
    - `style:` - Code style changes (formatting, etc.)
    - `refactor:` - Code refactoring
@@ -115,7 +115,7 @@ Ready to contribute code?
    - Improved build optimization
 
 3. **Developer Experience**
-   - Better VS Code integration
+   - Better Visual Studio Code integration
    - Improved scripts
    - More helpful error messages
 
@@ -186,7 +186,7 @@ improve.
 
 ## 🙏 Recognition
 
-Contributors will be recognized in the README and release notes.
+Contributors will be recognized in the readme and release notes.
 
 ---
 
