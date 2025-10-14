@@ -105,7 +105,6 @@ template provides:
 ├── coverage/               # Test coverage reports (generated)
 ├── dist/                   # Build output (generated)
 ├── script/                 # Utility scripts
-│   ├── copyright.sh        # Copyright header management
 │   └── release.sh          # Release automation
 ├── src/
 │   ├── index.ts            # Main entry point
