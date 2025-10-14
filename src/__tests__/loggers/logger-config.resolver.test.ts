@@ -21,7 +21,7 @@ import {
   IPinoLoggerConfig,
   LoggerConfigResolver,
   LogLevel
-} from '../logging/index.js';
+} from '../../logging/index.js';
 
 describe('LoggerConfigResolver', () => {
   const originalEnv = process.env;
@@ -134,6 +134,58 @@ describe('LoggerConfigResolver', () => {
 
       expect(pinoOptions.level).toBe(LogLevel.INFO);
       expect(pinoOptions.base).toEqual({});
+    });
+
+    it('should handle config with undefined base for Pino options', () => {
+      const config: IPinoLoggerConfig = {
+        level: LogLevel.WARNING as any,
+        base: undefined
+      };
+
+      const pinoOptions = LoggerConfigResolver.toPinoOptions(config);
+
+      expect(pinoOptions.level).toBe(LogLevel.WARNING);
+      expect(pinoOptions.base).toEqual({});
+    });
+
+    it('should handle config with null base for Pino options', () => {
+      const config: IPinoLoggerConfig = {
+        level: LogLevel.ERROR as any,
+        base: null as any
+      };
+
+      const pinoOptions = LoggerConfigResolver.toPinoOptions(config);
+
+      expect(pinoOptions.level).toBe(LogLevel.ERROR);
+      expect(pinoOptions.base).toEqual({});
+    });
+  });
+
+  describe('GitHub Actions environment', () => {
+    beforeEach(() => {
+      process.env.GITHUB_ACTIONS = 'true';
+      process.env.GITHUB_RUN_ID = '12345';
+      process.env.GITHUB_SHA = 'abc123';
+      process.env.GITHUB_REF = 'refs/heads/main';
+      process.env.GITHUB_REPOSITORY = 'owner/repo';
+      process.env.npm_package_version = '1.0.0';
+    });
+
+    it('should resolve configuration for GitHub Actions environment', () => {
+      const config = LoggerConfigResolver.resolve();
+
+      expect(config.level).toBe(LogLevel.INFO);
+      expect(config.prettyPrint).toBe(false);
+      expect(config.enableCore).toBe(true);
+      expect(config.enablePino).toBe(true);
+      expect(config.base).toEqual({
+        service: 'github-action',
+        version: '1.0.0',
+        runId: '12345',
+        sha: 'abc123',
+        ref: 'refs/heads/main',
+        repository: 'owner/repo'
+      });
     });
   });
 });

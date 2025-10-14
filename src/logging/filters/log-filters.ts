@@ -21,24 +21,26 @@ import { ILogMetadata, LogFilter, LogLevel } from '../types.js';
  * Common log filters
  */
 export class LogFilters {
+  private static readonly LEVEL_VALUES: Record<LogLevel, number> = {
+    [LogLevel.GROUP]: -1,
+    [LogLevel.DEBUG]: 0,
+    [LogLevel.INFO]: 1,
+    [LogLevel.WARNING]: 2,
+    [LogLevel.ERROR]: 3,
+    [LogLevel.FAILED]: 4
+  };
+
   /**
    * Filter out logs below a certain level
    * @param minLevel - The minimum log level to allow.
    * @return A LogFilter function that filters out logs below the specified level.
    */
   static levelFilter(minLevel: LogLevel): LogFilter {
-    const levels: Record<LogLevel, number> = {
-      [LogLevel.GROUP]: -1,
-      [LogLevel.DEBUG]: 0,
-      [LogLevel.INFO]: 1,
-      [LogLevel.WARNING]: 2,
-      [LogLevel.ERROR]: 3,
-      [LogLevel.FAILED]: 4
-    };
-    const minLevelValue = levels[minLevel];
+    const minLevelValue = this.LEVEL_VALUES[minLevel];
 
     return (level: string) => {
-      const levelValue = levels[level as keyof typeof levels] ?? 1;
+      const levelValue =
+        this.LEVEL_VALUES[level as keyof typeof this.LEVEL_VALUES] ?? 1;
       return levelValue >= minLevelValue;
     };
   }
@@ -85,7 +87,7 @@ export class LogFilters {
 
     return () => {
       const now = Date.now();
-      if (now - lastReset > 1000) {
+      if (now - lastReset >= 1000) {
         lastReset = now;
         count = 0;
       }

@@ -29,54 +29,106 @@ export class LoggerConfigResolver {
   static resolve(
     overrides: Partial<IPinoLoggerConfig> = {}
   ): IPinoLoggerConfig {
-    const isProduction = process.env.NODE_ENV === 'production';
-    const isDevelopment = process.env.NODE_ENV === 'development';
+    const config = this.createBaseConfig();
+    this.applyEnvironmentSpecificSettings(config);
+    return { ...config, ...overrides };
+  }
+
+  /**
+   * Create the base configuration with common settings
+   * @return Base IPinoLoggerConfig object
+   */
+  private static createBaseConfig(): IPinoLoggerConfig {
     const isGitHubActions = Boolean(process.env.GITHUB_ACTIONS);
 
-    const defaultConfig: IPinoLoggerConfig = {
+    return {
       level: (process.env.LOG_LEVEL as pino.LevelWithSilent) || 'info',
-      prettyPrint: isDevelopment,
+      prettyPrint: this.isDevelopment(),
       enableCore: isGitHubActions,
       enablePino: true,
       base: {
         service: 'github-action',
         version: process.env.npm_package_version || '1.0.0',
-        ...(isGitHubActions && {
-          repository: process.env.GITHUB_REPOSITORY,
-          workflow: process.env.GITHUB_WORKFLOW,
-          runId: process.env.GITHUB_RUN_ID,
-          ref: process.env.GITHUB_REF,
-          sha: process.env.GITHUB_SHA
-        })
+        ...(isGitHubActions && this.getGitHubMetadata())
       }
     };
+  }
 
-    // Production-specific configuration
-    if (isProduction) {
-      defaultConfig.transport = {
-        target: 'pino/file',
-        options: {
-          destination: process.env.LOG_FILE || './logs/app.log',
-          mkdir: true
-        }
-      };
-    } else if (isDevelopment) {
-      defaultConfig.transport = {
-        target: 'pino-pretty',
-        options: {
-          colorize: true,
-          translateTime: 'yyyy-mm-dd HH:MM:ss',
-          ignore: 'pid,hostname',
-          singleLine: false
-        }
-      };
+  /**
+   * Apply environment-specific transport settings
+   * @param config - The configuration object to modify
+   */
+  private static applyEnvironmentSpecificSettings(config: IPinoLoggerConfig) {
+    if (this.isProduction()) {
+      config.transport = this.createProductionTransport();
+    } else if (this.isDevelopment()) {
+      config.transport = this.createDevelopmentTransport();
     }
+  }
 
-    return { ...defaultConfig, ...overrides };
+  /**
+   * Check if running in development environment
+   * @return True if in development mode, false otherwise
+   */
+  private static isDevelopment(): boolean {
+    return process.env.NODE_ENV === 'development';
+  }
+
+  /**
+   * Check if running in production environment
+   */
+  private static isProduction(): boolean {
+    return process.env.NODE_ENV === 'production';
+  }
+
+  /**
+   * Get GitHub Actions metadata for logging
+   * @return Object with GitHub metadata
+   */
+  private static getGitHubMetadata() {
+    return {
+      repository: process.env.GITHUB_REPOSITORY,
+      workflow: process.env.GITHUB_WORKFLOW,
+      runId: process.env.GITHUB_RUN_ID,
+      ref: process.env.GITHUB_REF,
+      sha: process.env.GITHUB_SHA
+    };
+  }
+
+  /**
+   * Create transport configuration for production
+   * @return Transport options for production logging
+   */
+  private static createProductionTransport() {
+    return {
+      target: 'pino/file',
+      options: {
+        destination: process.env.LOG_FILE || './logs/app.log',
+        mkdir: true
+      }
+    };
+  }
+
+  /**
+   * Create transport configuration for development
+   * @return Transport options for development logging
+   */
+  private static createDevelopmentTransport() {
+    return {
+      target: 'pino-pretty',
+      options: {
+        colorize: true,
+        translateTime: 'yyyy-mm-dd HH:MM:ss',
+        ignore: 'pid,hostname',
+        singleLine: false
+      }
+    };
   }
 
   /**
    * Create Pino options from resolved config
+   * @param config - The resolved IPinoLoggerConfig
+   * @returns Pino LoggerOptions object
    */
   static toPinoOptions(config: IPinoLoggerConfig): pino.LoggerOptions {
     return {

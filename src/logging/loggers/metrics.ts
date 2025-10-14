@@ -15,7 +15,7 @@
  *
  */
 
-import { ILogger, ILoggerMetrics, ILogMetadata } from '../types.js';
+import { ILogger, ILoggerMetrics, ILogMetadata, LogLevel } from '../types.js';
 
 /**
  * Logger wrapper that collects metrics and telemetry
@@ -92,7 +92,7 @@ export class MetricsLogger implements ILogger {
    * @param metadata - Optional metadata to include with the failure.
    */
   setFailed(message: string, metadata?: ILogMetadata): void {
-    this.recordLog('setFailed', message, metadata);
+    this.recordLog(LogLevel.FAILED, message, metadata);
     this.wrappedLogger.setFailed(message, metadata);
   }
 
@@ -110,6 +110,7 @@ export class MetricsLogger implements ILogger {
 
   /**
    * Get current metrics snapshot
+   * @returns A copy of the current metrics
    */
   getMetrics(): ILoggerMetrics {
     this.updateMetrics();
@@ -118,6 +119,8 @@ export class MetricsLogger implements ILogger {
 
   /**
    * Start periodic metrics reporting
+   * @param intervalMs - Reporting interval in milliseconds (default: 60000ms)
+   * @returns A function to stop the periodic reporting
    */
   startMetricsReporting(intervalMs: number = 60000): () => void {
     const interval = setInterval(() => {
@@ -162,22 +165,22 @@ export class MetricsLogger implements ILogger {
    * @param level - The log level.
    */
   private updateLevelMetrics(level: string): void {
-    switch (level) {
-      case 'info':
+    switch (level as LogLevel) {
+      case LogLevel.INFO:
         this.metrics.infoLogs++;
         break;
-      case 'debug':
+      case LogLevel.DEBUG:
         this.metrics.debugLogs++;
         break;
-      case 'warning':
+      case LogLevel.WARNING:
         this.metrics.warnings++;
         this.metrics.warningLogs++;
         break;
-      case 'error':
+      case LogLevel.ERROR:
         this.metrics.errors++;
         this.metrics.errorLogs++;
         break;
-      case 'setFailed':
+      case LogLevel.FAILED:
         this.metrics.failedLogs++;
         break;
     }
@@ -188,28 +191,53 @@ export class MetricsLogger implements ILogger {
    */
   private updateMetrics(): void {
     const now = Date.now();
-    this.metrics.lastUpdated = now;
-    this.metrics.uptime = now - this.startTime;
-
-    if (this.metrics.totalLogs > 0) {
-      this.metrics.averageLogSize = this.totalLogSize / this.metrics.totalLogs;
-    }
-
-    if (this.metrics.firstLogTime) {
-      const durationMinutes = (now - this.metrics.firstLogTime) / (1000 * 60);
-      if (durationMinutes > 0) {
-        this.metrics.logsPerMinute = this.metrics.totalLogs / durationMinutes;
-        this.metrics.peakLogsPerMinute = Math.max(
-          this.metrics.peakLogsPerMinute,
-          this.metrics.logsPerMinute
-        );
-      }
-    }
-
-    // Update legacy fields for backward compatibility
-    this.metrics.logRate = this.metrics.logsPerMinute / 60; // logs per second
+    this.updateTimestamps(now);
+    this.updateUptime(now);
+    this.updateAverageLogSize();
+    this.updateLogRates(now);
 
     // Call the metrics callback if provided
     this.metricsCallback?.(this.metrics);
+  }
+
+  /**
+   * Update timestamp-related metrics
+   */
+  private updateTimestamps(now: number): void {
+    this.metrics.lastUpdated = now;
+  }
+
+  /**
+   * Update uptime metric
+   */
+  private updateUptime(now: number): void {
+    this.metrics.uptime = now - this.startTime;
+  }
+
+  /**
+   * Update average log size metric
+   */
+  private updateAverageLogSize(): void {
+    if (this.metrics.totalLogs > 0) {
+      this.metrics.averageLogSize = this.totalLogSize / this.metrics.totalLogs;
+    }
+  }
+
+  /**
+   * Update log rate metrics
+   */
+  private updateLogRates(now: number): void {
+    if (!this.metrics.firstLogTime) {
+      return;
+    }
+
+    const durationMinutes = (now - this.metrics.firstLogTime) / (1000 * 60);
+    if (durationMinutes > 0) {
+      this.metrics.logsPerMinute = this.metrics.totalLogs / durationMinutes;
+      this.metrics.peakLogsPerMinute = Math.max(
+        this.metrics.peakLogsPerMinute,
+        this.metrics.logsPerMinute
+      );
+    }
   }
 }

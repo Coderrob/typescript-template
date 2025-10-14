@@ -22,7 +22,7 @@ import {
   createCompositeLogger,
   createPinoLogger,
   PinoLogger
-} from '../logging/index.js';
+} from '../../logging/index.js';
 
 describe('Factory Functions', () => {
   afterEach(() => {

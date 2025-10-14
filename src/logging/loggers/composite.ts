@@ -84,32 +84,83 @@ export class CompositeLogger implements ILogger {
       return fn();
     }
 
-    // If there's only one logger, delegate directly
     if (this.loggers.length === 1) {
       return this.loggers[0].group(name, fn);
     }
 
-    // For multiple loggers, execute in parallel but handle errors appropriately
+    return this.executeGroupWithMultipleLoggers(name, fn);
+  }
+
+  /**
+   * Execute group operation when there are multiple loggers.
+   * @param name - The name of the group.
+   * @param fn - The function to execute within the group.
+   * @returns A promise that resolves when all group operations complete.
+   */
+  private async executeGroupWithMultipleLoggers<T>(
+    name: string,
+    fn: () => Promise<T>
+  ): Promise<T> {
     const results = await Promise.allSettled(
-      this.loggers.map(async (logger, index) => {
-        try {
-          return await logger.group(name, fn);
-        } catch (error) {
-          // Re-throw to be handled by Promise.allSettled
-          throw new Error(
-            `Logger ${index} failed in group operation: ${error}`
-          );
-        }
-      })
+      this.loggers.map((logger, index) =>
+        this.executeLoggerGroup(logger, index, name, fn)
+      )
     );
 
-    // Analyze results to determine success/failure
+    return this.processGroupResults(results);
+  }
+
+  /**
+   * Execute group operation for a single logger with error handling.
+   * @param logger - The logger to execute the group on.
+   * @param index - The index of the logger in the composite.
+   * @param name - The name of the group.
+   * @param fn - The function to execute within the group.
+   * @returns A promise that resolves with the result of the group operation.
+   */
+  private async executeLoggerGroup<T>(
+    logger: ILogger,
+    index: number,
+    name: string,
+    fn: () => Promise<T>
+  ): Promise<T> {
+    try {
+      return await logger.group(name, fn);
+    } catch (error) {
+      throw new Error(`Logger ${index} failed in group operation: ${error}`);
+    }
+  }
+
+  /**
+   * Process the results of multiple logger group operations.
+   * @param results - Array of PromiseSettledResult from each logger's group operation.
+   * @returns The result from the first successful logger, or throws if all failed.
+   */
+  private processGroupResults<T>(results: PromiseSettledResult<T>[]): T {
+    const { failures, successResult } = this.analyzeResults(results);
+
+    if (failures.length === results.length) {
+      this.logAllFailures(failures);
+      throw failures[0].error;
+    }
+
+    if (failures.length > 0) {
+      this.logPartialFailures(failures, results.length);
+    }
+
+    return successResult as T;
+  }
+
+  /**
+   * Analyze the results to separate failures and find success result.
+   * @return An object containing failures and the first successful result (if any).
+   */
+  private analyzeResults<T>(results: PromiseSettledResult<T>[]) {
     const failures: Array<{ index: number; error: unknown }> = [];
     let successResult: T | undefined;
 
     results.forEach((result, index) => {
       if (result.status === 'fulfilled') {
-        // Use the first successful result (they should all be the same)
         if (successResult === undefined) {
           successResult = result.value;
         }
@@ -118,22 +169,30 @@ export class CompositeLogger implements ILogger {
       }
     });
 
-    // If all loggers failed, throw the first error
-    if (failures.length === results.length) {
-      console.error('All loggers failed in group operation:', failures);
-      throw failures[0].error;
-    }
+    return { failures, successResult };
+  }
 
-    // If some failed but at least one succeeded, log warnings but continue
-    if (failures.length > 0) {
-      console.warn(
-        `${failures.length} of ${results.length} loggers failed in group operation:`,
-        failures
-      );
-    }
+  /**
+   * Log when all loggers failed.
+   * @param failures - Array of failure details
+   */
+  private logAllFailures(failures: Array<{ index: number; error: unknown }>) {
+    console.error('All loggers failed in group operation:', failures);
+  }
 
-    // Return the successful result
-    return successResult as T;
+  /**
+   * Log when some loggers failed but others succeeded.
+   * @param failures - Array of failure details
+   * @param totalCount - Total number of loggers involved
+   */
+  private logPartialFailures(
+    failures: Array<{ index: number; error: unknown }>,
+    totalCount: number
+  ) {
+    console.warn(
+      `${failures.length} of ${totalCount} loggers failed in group operation:`,
+      failures
+    );
   }
 
   /**

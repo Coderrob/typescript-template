@@ -16,8 +16,6 @@
  */
 
 // Core logger implementations
-export type { CoreFunctions } from './core.js';
-export { CoreLogger } from './core.js';
 export { CompositeLogger } from './composite.js';
 export { FilteredLogger } from './filtered.js';
 export { MetricsLogger } from './metrics.js';

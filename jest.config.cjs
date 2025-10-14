@@ -36,7 +36,7 @@ module.exports = {
   transform: {
     '^.+\\.ts$': [
       'ts-jest',
-      { tsconfig: 'tsconfig.test.json', useESM: true, injectGlobals: true }
+      { tsconfig: 'tsconfig.test.json', useESM: false, injectGlobals: true }
     ]
   },
   transformIgnorePatterns: [

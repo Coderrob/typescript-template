@@ -17,10 +17,14 @@
 
 import { jest } from '@jest/globals';
 
-import { LogLevel, MockLogger } from '../logging/index.js';
+import { LogLevel, MockLogger } from '../../logging/index.js';
 
 describe('MockLogger', () => {
   let mockLogger: MockLogger;
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   beforeEach(() => {
     mockLogger = new MockLogger();

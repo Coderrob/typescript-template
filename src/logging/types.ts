@@ -23,7 +23,7 @@ export enum LogLevel {
   INFO = 'info',
   WARNING = 'warning',
   ERROR = 'error',
-  FAILED = 'setFailed',
+  FAILED = 'failed',
   GROUP = 'group'
 }
 

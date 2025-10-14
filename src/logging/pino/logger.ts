@@ -52,6 +52,7 @@ export class PinoLogger implements ILogger {
 
   /**
    * Check if Pino logger is available and functioning.
+   * @returns True if the logger is available, false otherwise.
    */
   public isLoggerAvailable(): boolean {
     return this.isAvailable;

@@ -23,7 +23,7 @@ import {
   ILogMetadata,
   LogLevel,
   MockLogger
-} from '../logging/index.js';
+} from '../../logging/index.js';
 
 describe('CompositeLogger', () => {
   let mockLogger1: MockLogger;
