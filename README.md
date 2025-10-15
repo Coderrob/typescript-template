@@ -5,18 +5,14 @@
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-A production-ready TypeScript template repository with comprehensive linting,
-formatting, testing, and build configuration. Perfect for quickly bootstrapping
-new TypeScript projects with industry best practices built-in.
+A production-ready TypeScript template repository with comprehensive linting, formatting, testing, and build configuration. Perfect for quickly bootstrapping new TypeScript projects with industry best practices built-in.
 
 ## 🎯 Why Use This Template?
 
-Starting a new TypeScript project often means hours of configuration setup. This
-template provides:
+Starting a new TypeScript project often means hours of configuration setup. This template provides:
 
 - ✅ **Zero Configuration Needed**: All tooling pre-configured and ready to use
-- ✅ **Industry Best Practices**: Battle-tested configurations for linting,
-  formatting, and testing
+- ✅ **Industry Best Practices**: Battle-tested configurations for linting, formatting, and testing
 - ✅ **Immediate Productivity**: Start writing code, not configuring tools
 - ✅ **Consistent Code Quality**: Enforced standards across your entire project
 - ✅ **CI/CD Ready**: GitHub Actions workflows included
@@ -24,25 +20,17 @@ template provides:
 
 ## ✨ Features
 
-- **📦 Modern TypeScript**: Full TypeScript 5.7+ configuration with strict type
-  checking
-- **🔍 Code Quality**: ESLint with SonarJS static analysis, complexity limits,
-  and import sorting
+- **📦 Modern TypeScript**: Full TypeScript 5.7+ configuration with strict type checking
+- **🔍 Code Quality**: ESLint with SonarJS static analysis, complexity limits, and import sorting
 - **🎨 Code Formatting**: Prettier integration with automatic formatting on save
-- **🧪 Comprehensive Testing**: Jest testing framework with coverage reporting
-  and badges
-- **⚡ Optimized Build**: Rollup bundling with Terser minification for optimal
-  output
-- **🏗️ Modular Architecture**: Example project structure with dependency
-  injection patterns
+- **🧪 Comprehensive Testing**: Jest testing framework with coverage reporting and badges
+- **⚡ Optimized Build**: Rollup bundling with Terser minification for optimal output
+- **🏗️ Modular Architecture**: Example project structure with dependency injection patterns
 - **📊 Quality Gates**: Duplicate code detection, circular dependency checking
 - **🛡️ Security**: SonarJS security patterns and vulnerability detection
-- **🔧 Developer Experience**: EditorConfig, Visual Studio Code settings, and
-  development container support
-- **📋 CI/CD Ready**: Pre-configured GitHub Actions workflows with automated
-  quality checks
-- **🎓 Learning Resource**: Well-documented examples of TypeScript best
-  practices
+- **🔧 Developer Experience**: EditorConfig, Visual Studio Code settings, and development container support
+- **📋 CI/CD Ready**: Pre-configured GitHub Actions workflows with automated quality checks
+- **🎓 Learning Resource**: Well-documented examples of TypeScript best practices
 
 ## 🚀 Quick Start
 

@@ -1,14 +1,10 @@
 # Contributing to TypeScript Template
 
-Thank you for considering contributing to this TypeScript template! This
-document provides guidelines for contributing improvements to the template
-itself.
+Thank you for considering contributing to this TypeScript template! This document provides guidelines for contributing improvements to the template itself.
 
 ## 🎯 About This Template
 
-This is a **template repository** designed to help developers quickly start
-TypeScript projects with best practices built-in. Contributions should focus on
-improving the template's quality, usability, and maintainability.
+This is a **template repository** designed to help developers quickly start TypeScript projects with best practices built-in. Contributions should focus on improving the template's quality, usability, and maintainability.
 
 ## 🤝 How to Contribute
 
