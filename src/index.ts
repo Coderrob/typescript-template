@@ -20,4 +20,6 @@
 /**
  * Main entry point for the repository.
  */
-export {};
+
+// Re-export all logging functionality
+export * from './logging/index.js';
