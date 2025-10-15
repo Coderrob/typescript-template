@@ -37,27 +37,27 @@ Starting a new TypeScript project often means hours of configuration setup. This
 ### Using This Template
 
 1. **Click "Use this template"** button at the top of this repository
-2. **Create your new repository** from the template
-3. **Clone your new repository**:
+1. **Create your new repository** from the template
+1. **Clone your new repository**:
 
    ```bash
    git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
    cd YOUR_REPO_NAME
    ```
 
-4. **Enable Corepack** (if not already enabled):
+1. **Enable Corepack** (if not already enabled):
 
    ```bash
    corepack enable
    ```
 
-5. **Install dependencies**:
+1. **Install dependencies**:
 
    ```bash
    yarn install
    ```
 
-6. **Start coding!** The template includes example code you can replace with
+1. **Start coding!** The template includes example code you can replace with
    your own.
 
 ### First Steps After Setup
@@ -67,15 +67,15 @@ Starting a new TypeScript project often means hours of configuration setup. This
    - Update `repository`, `bugs`, and `homepage` URLs
    - Modify `keywords` to match your project
 
-2. **Update `readme`**:
+1. **Update `readme`**:
    - Replace this readme with your project's documentation
    - Update badges with your repository information
 
-3. **Configure licensing**:
+1. **Configure licensing**:
    - Review and update `LICENSE` file if needed
    - Update copyright headers in source files (or run `yarn copyright`)
 
-4. **Customize CODEOWNERS**:
+1. **Customize CODEOWNERS**:
    - Update `.github/CODEOWNERS` with your team's information
 
 ## 📁 Project Structure
@@ -140,19 +140,19 @@ Starting a new TypeScript project often means hours of configuration setup. This
    nvm use
    ```
 
-2. **Enable Corepack** (ships with Node.js 16.10+):
+1. **Enable Corepack** (ships with Node.js 16.10+):
 
    ```bash
    corepack enable
    ```
 
-3. **Install dependencies**:
+1. **Install dependencies**:
 
    ```bash
    yarn install
    ```
 
-4. **Verify everything works**:
+1. **Verify everything works**:
 
    ```bash
    yarn all
@@ -178,11 +178,11 @@ Starting a new TypeScript project often means hours of configuration setup. This
 ### Day-to-Day Development Workflow
 
 1. **Write your code** in the `src/` directory
-2. **Add tests** in `src/__tests__/` for your new features
-3. **Run tests** frequently: `yarn test`
-4. **Check code quality**: `yarn quality`
-5. **Fix issues automatically**: `yarn lint:fix`
-6. **Build for production**: `yarn package`
+1. **Add tests** in `src/__tests__/` for your new features
+1. **Run tests** frequently: `yarn test`
+1. **Check code quality**: `yarn quality`
+1. **Fix issues automatically**: `yarn lint:fix`
+1. **Build for production**: `yarn package`
 
 ### Testing
 
@@ -390,12 +390,12 @@ Fully configured development container for consistent environments across teams.
 Contributions to improve this template are welcome!
 
 1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/improvement`
-3. Make your changes following the existing patterns
-4. Add or update tests as needed
-5. Run the complete pipeline: `yarn all`
-6. Ensure all quality gates pass
-7. Submit a pull request with a clear description
+1. Create a feature branch: `git checkout -b feature/improvement`
+1. Make your changes following the existing patterns
+1. Add or update tests as needed
+1. Run the complete pipeline: `yarn all`
+1. Ensure all quality gates pass
+1. Submit a pull request with a clear description
 
 ## 📄 License
 
