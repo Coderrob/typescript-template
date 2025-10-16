@@ -5,18 +5,14 @@
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-A production-ready TypeScript template repository with comprehensive linting,
-formatting, testing, and build configuration. Perfect for quickly bootstrapping
-new TypeScript projects with industry best practices built-in.
+A production-ready TypeScript template repository with comprehensive linting, formatting, testing, and build configuration. Perfect for quickly bootstrapping new TypeScript projects with industry best practices built-in.
 
 ## 🎯 Why Use This Template?
 
-Starting a new TypeScript project often means hours of configuration setup. This
-template provides:
+Starting a new TypeScript project often means hours of configuration setup. This template provides:
 
 - ✅ **Zero Configuration Needed**: All tooling pre-configured and ready to use
-- ✅ **Industry Best Practices**: Battle-tested configurations for linting,
-  formatting, and testing
+- ✅ **Industry Best Practices**: Battle-tested configurations for linting, formatting, and testing
 - ✅ **Immediate Productivity**: Start writing code, not configuring tools
 - ✅ **Consistent Code Quality**: Enforced standards across your entire project
 - ✅ **CI/CD Ready**: GitHub Actions workflows included
@@ -24,52 +20,44 @@ template provides:
 
 ## ✨ Features
 
-- **📦 Modern TypeScript**: Full TypeScript 5.7+ configuration with strict type
-  checking
-- **🔍 Code Quality**: ESLint with SonarJS static analysis, complexity limits,
-  and import sorting
+- **📦 Modern TypeScript**: Full TypeScript 5.7+ configuration with strict type checking
+- **🔍 Code Quality**: ESLint with SonarJS static analysis, complexity limits, and import sorting
 - **🎨 Code Formatting**: Prettier integration with automatic formatting on save
-- **🧪 Comprehensive Testing**: Jest testing framework with coverage reporting
-  and badges
-- **⚡ Optimized Build**: Rollup bundling with Terser minification for optimal
-  output
-- **🏗️ Modular Architecture**: Example project structure with dependency
-  injection patterns
+- **🧪 Comprehensive Testing**: Jest testing framework with coverage reporting and badges
+- **⚡ Optimized Build**: Rollup bundling with Terser minification for optimal output
+- **🏗️ Modular Architecture**: Example project structure with dependency injection patterns
 - **📊 Quality Gates**: Duplicate code detection, circular dependency checking
 - **🛡️ Security**: SonarJS security patterns and vulnerability detection
-- **🔧 Developer Experience**: EditorConfig, VS Code settings, and development
-  container support
-- **📋 CI/CD Ready**: Pre-configured GitHub Actions workflows with automated
-  quality checks
-- **🎓 Learning Resource**: Well-documented examples of TypeScript best
-  practices
+- **🔧 Developer Experience**: EditorConfig, Visual Studio Code settings, and development container support
+- **📋 CI/CD Ready**: Pre-configured GitHub Actions workflows with automated quality checks
+- **🎓 Learning Resource**: Well-documented examples of TypeScript best practices
 
 ## 🚀 Quick Start
 
 ### Using This Template
 
 1. **Click "Use this template"** button at the top of this repository
-2. **Create your new repository** from the template
-3. **Clone your new repository**:
+1. **Create your new repository** from the template
+1. **Clone your new repository**:
 
    ```bash
    git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
    cd YOUR_REPO_NAME
    ```
 
-4. **Enable Corepack** (if not already enabled):
+1. **Enable Corepack** (if not already enabled):
 
    ```bash
    corepack enable
    ```
 
-5. **Install dependencies**:
+1. **Install dependencies**:
 
    ```bash
    yarn install
    ```
 
-6. **Start coding!** The template includes example code you can replace with
+1. **Start coding!** The template includes example code you can replace with
    your own.
 
 ### First Steps After Setup
@@ -79,15 +67,15 @@ template provides:
    - Update `repository`, `bugs`, and `homepage` URLs
    - Modify `keywords` to match your project
 
-2. **Update `README.md`**:
-   - Replace this README with your project's documentation
+1. **Update `readme`**:
+   - Replace this readme with your project's documentation
    - Update badges with your repository information
 
-3. **Configure licensing**:
+1. **Configure licensing**:
    - Review and update `LICENSE` file if needed
    - Update copyright headers in source files (or run `yarn copyright`)
 
-4. **Customize CODEOWNERS**:
+1. **Customize CODEOWNERS**:
    - Update `.github/CODEOWNERS` with your team's information
 
 ## 📁 Project Structure
@@ -105,7 +93,6 @@ template provides:
 ├── coverage/               # Test coverage reports (generated)
 ├── dist/                   # Build output (generated)
 ├── script/                 # Utility scripts
-│   ├── copyright.sh        # Copyright header management
 │   └── release.sh          # Release automation
 ├── src/
 │   ├── index.ts            # Main entry point
@@ -116,16 +103,18 @@ template provides:
 │   │   ├── filters/        # Log filtering system
 │   │   └── types.ts        # Type definitions
 │   └── __tests__/          # Comprehensive test suite
+│       ├── jest.setup.ts   # Jest globals setup for ESM
+│       └── loggers/        # Logger implementation tests
 ├── .editorconfig           # Editor configuration for consistent coding styles
 ├── .gitignore              # Git ignore patterns
 ├── .gitattributes          # Git attributes
 ├── .jscpd.json            # Code duplication detection configuration
-├── .markdown-lint.yml      # Markdown linting rules
+├── .markdown-lint.yml      # Markdown linter rules
 ├── .npmignore              # NPM publish ignore patterns
 ├── .nvmrc                  # Node.js version specification
 ├── .prettierignore         # Prettier ignore patterns
 ├── .prettierrc.yml         # Prettier code formatting configuration
-├── .yaml-lint.yml          # YAML linting rules
+├── .yaml-lint.yml          # YAML file linter rules                   |
 ├── CODEOWNERS              # Code ownership and review assignments
 ├── eslint.config.mjs       # Modern ESLint flat configuration
 ├── jest.config.cjs         # Jest testing configuration
@@ -141,7 +130,7 @@ template provides:
 ### Prerequisites
 
 - **Node.js 20+** (specified in `.nvmrc`)
-- **Yarn 4.x** (managed via Corepack)
+- **Yarn 4.5.3** (managed via Corepack)
 
 ### Setup Your Development Environment
 
@@ -151,19 +140,19 @@ template provides:
    nvm use
    ```
 
-2. **Enable Corepack** (ships with Node.js 16.10+):
+1. **Enable Corepack** (ships with Node.js 16.10+):
 
    ```bash
    corepack enable
    ```
 
-3. **Install dependencies**:
+1. **Install dependencies**:
 
    ```bash
    yarn install
    ```
 
-4. **Verify everything works**:
+1. **Verify everything works**:
 
    ```bash
    yarn all
@@ -176,7 +165,7 @@ template provides:
 | `yarn all`           | 🚀 Complete pipeline: lint:fix → quality → test → package |
 | `yarn typecheck`     | 📋 TypeScript type checking without emit                  |
 | `yarn lint`          | 🔍 Run Prettier and ESLint validation                     |
-| `yarn lint:fix`      | 🎨 Auto-format and fix code issues                        |
+| `yarn lint:fix`      | 🎨 autoformat and fix code issues                         |
 | `yarn quality`       | 📊 Run quality gates: lint + duplication + circular deps  |
 | `yarn test`          | 🧪 Run Jest tests with coverage reporting                 |
 | `yarn coverage`      | 📈 Generate coverage badge                                |
@@ -189,11 +178,11 @@ template provides:
 ### Day-to-Day Development Workflow
 
 1. **Write your code** in the `src/` directory
-2. **Add tests** in `src/__tests__/` for your new features
-3. **Run tests** frequently: `yarn test`
-4. **Check code quality**: `yarn quality`
-5. **Fix issues automatically**: `yarn lint:fix`
-6. **Build for production**: `yarn package`
+1. **Add tests** in `src/__tests__/` for your new features
+1. **Run tests** frequently: `yarn test`
+1. **Check code quality**: `yarn quality`
+1. **Fix issues automatically**: `yarn lint:fix`
+1. **Build for production**: `yarn package`
 
 ### Testing
 
@@ -246,7 +235,7 @@ This uses Rollup to create an optimized bundle in `dist/`.
 The repository includes a comprehensive CI/CD workflow:
 
 - **CI Pipeline** (`.github/workflows/ci.yml`):
-  - Runs on multiple Node.js versions
+  - Runs on Node.js 20 with Ubuntu latest
   - Executes linting, type checking, and tests
   - Generates coverage reports
   - Builds production bundles
@@ -256,7 +245,7 @@ The repository includes a comprehensive CI/CD workflow:
 
 Edit `.github/workflows/ci.yml` to adjust:
 
-- Node.js versions to test against
+- Node.js version (currently set to 20)
 - Additional build steps
 - Deployment configurations
 - Quality gate thresholds
@@ -269,7 +258,7 @@ The template includes two TypeScript configurations:
 
 - **`tsconfig.json`**: Production configuration for building
   - Strict type checking enabled
-  - ES2022 target and module format
+  - ECMAScript 2022 target and module format
   - Path aliases supported (`@/*` → `src/*`)
 
 - **`tsconfig.test.json`**: Test environment configuration
@@ -282,9 +271,11 @@ The template includes two TypeScript configurations:
 Modern ESLint flat configuration (`eslint.config.mjs`) with:
 
 - **TypeScript Integration**: Full type-aware linting with strict rules
-- **SonarJS Static Analysis**: Security patterns, complexity limits, code smells
+- **SonarJS Static Analysis**: Comprehensive static code analysis with security
+  patterns, extremely low complexity limits, and code quality rules
 - **Import Organization**: Automatic import sorting and organization
-- **Complexity Monitoring**: Cyclomatic complexity limits (fails at >10)
+- **Complexity Monitoring**: Extremely low cyclomatic complexity limits (fails
+  at >5) and cognitive complexity (fails at >8)
 - **Jest Support**: Test-specific rules and globals
 - **Prettier Integration**: Seamless code formatting
 
@@ -304,6 +295,8 @@ Code formatting with Prettier (`.prettierrc.yml`):
 Testing framework setup (`jest.config.cjs`):
 
 - TypeScript support via `ts-jest`
+- ESM module support with experimental VM modules
+- Jest globals injection via setup file (`src/__tests__/jest.setup.ts`)
 - Coverage thresholds and reporting
 - Module path mapping
 - Test environment: Node.js
@@ -325,10 +318,10 @@ Production bundling (`rollup.config.js`):
 | `.editorconfig`      | Consistent editor settings across IDEs    |
 | `.gitignore`         | Git ignore patterns for Node.js projects  |
 | `.jscpd.json`        | Code duplication detection (1% threshold) |
-| `.markdown-lint.yml` | Markdown linting rules                    |
+| `.markdown-lint.yml` | Markdown linter rules                     |
 | `.nvmrc`             | Node.js version specification (20)        |
 | `.prettierignore`    | Files to exclude from formatting          |
-| `.yaml-lint.yml`     | YAML file linting rules                   |
+| `.yaml-lint.yml`     | YAML file linter rules                    |
 | `CODEOWNERS`         | Code ownership and review assignments     |
 
 ## 🏗️ Architecture
@@ -375,12 +368,13 @@ The template includes example code that you can:
 
 ### Quality Tools
 
-- **SonarJS**: Static code analysis and security patterns
+- **SonarJS**: Comprehensive static code analysis with security patterns,
+  extremely low complexity limits, and code quality rules
 - **JSCPD**: Code duplication detection
 - **Madge**: Circular dependency checking
 - **make-coverage-badge**: Automatic coverage badges
 
-### VS Code Integration
+### Visual Studio Code Integration
 
 - Workspace settings for consistent development
 - Recommended extensions
@@ -396,12 +390,12 @@ Fully configured development container for consistent environments across teams.
 Contributions to improve this template are welcome!
 
 1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/improvement`
-3. Make your changes following the existing patterns
-4. Add or update tests as needed
-5. Run the complete pipeline: `yarn all`
-6. Ensure all quality gates pass
-7. Submit a pull request with a clear description
+1. Create a feature branch: `git checkout -b feature/improvement`
+1. Make your changes following the existing patterns
+1. Add or update tests as needed
+1. Run the complete pipeline: `yarn all`
+1. Ensure all quality gates pass
+1. Submit a pull request with a clear description
 
 ## 📄 License
 

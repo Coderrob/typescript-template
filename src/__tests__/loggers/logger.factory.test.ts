@@ -15,11 +15,25 @@
  *
  */
 
-// istanbul ignore file
+import {
+  CompositeLogger,
+  createCompositeLogger,
+  createPinoLogger,
+  PinoLogger
+} from '../../logging/index.js';
 
-/**
- * Main entry point for the repository.
- */
+describe('Factory Functions', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-// Re-export all logging functionality
-export * from './logging/index.js';
+  it('should create composite logger with default configuration', () => {
+    const logger = createCompositeLogger();
+    expect(logger).toBeInstanceOf(CompositeLogger);
+  });
+
+  it('should create pino logger with default configuration', () => {
+    const logger = createPinoLogger();
+    expect(logger).toBeInstanceOf(PinoLogger);
+  });
+});

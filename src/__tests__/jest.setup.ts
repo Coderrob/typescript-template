@@ -17,25 +17,13 @@
 
 import { jest } from '@jest/globals';
 
-import {
-  CompositeLogger,
-  createCompositeLogger,
-  createPinoLogger,
-  PinoLogger
-} from '../logging/index.js';
-
-describe('Factory Functions', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should create composite logger with default configuration', () => {
-    const logger = createCompositeLogger();
-    expect(logger).toBeInstanceOf(CompositeLogger);
-  });
-
-  it('should create pino logger with default configuration', () => {
-    const logger = createPinoLogger();
-    expect(logger).toBeInstanceOf(PinoLogger);
-  });
-});
+// Make Jest globals available
+global.jest = jest;
+global.describe = describe;
+global.it = it;
+global.test = test;
+global.expect = expect;
+global.beforeEach = beforeEach;
+global.afterEach = afterEach;
+global.beforeAll = beforeAll;
+global.afterAll = afterAll;

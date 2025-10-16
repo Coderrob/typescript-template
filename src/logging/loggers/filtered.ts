@@ -42,7 +42,9 @@ export class FilteredLogger implements ILogger {
    */
   info(message: string, metadata?: ILogMetadata): void {
     this.logIfAllowed(LogLevel.INFO, message, metadata, () =>
-      this.wrappedLogger.info(message, metadata)
+      metadata
+        ? this.wrappedLogger.info(message, metadata)
+        : this.wrappedLogger.info(message)
     );
   }
 
@@ -63,7 +65,9 @@ export class FilteredLogger implements ILogger {
    */
   warning(message: string, metadata?: ILogMetadata): void {
     this.logIfAllowed(LogLevel.WARNING, message, metadata, () =>
-      this.wrappedLogger.warning(message, metadata)
+      metadata
+        ? this.wrappedLogger.warning(message, metadata)
+        : this.wrappedLogger.warning(message)
     );
   }
 
@@ -74,7 +78,9 @@ export class FilteredLogger implements ILogger {
    */
   error(message: string, metadata?: ILogMetadata): void {
     this.logIfAllowed(LogLevel.ERROR, message, metadata, () =>
-      this.wrappedLogger.error(message, metadata)
+      metadata
+        ? this.wrappedLogger.error(message, metadata)
+        : this.wrappedLogger.error(message)
     );
   }
 
@@ -156,15 +162,15 @@ export class FilteredLogger implements ILogger {
    * @returns True if the log should be recorded, false otherwise.
    */
   private shouldSample(level: LogLevel): boolean {
-    const key = level;
-    const now = Date.now();
-    const windowMs = this.sampling?.windowMs || 60000;
-
-    const logCount = this.getOrCreateLogCount(key, now, windowMs);
-
     if (!this.passesRateSampling()) {
       return false;
     }
+
+    const logCount = this.getOrCreateLogCount(
+      level,
+      Date.now(),
+      this.sampling?.windowMs || 60000
+    );
 
     if (!this.passesWindowSampling(logCount)) {
       return false;
@@ -175,32 +181,12 @@ export class FilteredLogger implements ILogger {
   }
 
   /**
-   * Retrieves or initializes the log count for a given key and time window.
-   * @param key - The key representing the log level or category.
-   * @param now - The current timestamp.
-   * @param windowMs - The duration of the time window in milliseconds.
-   * @returns The log count object containing the count and window start time.
-   */
-  private getOrCreateLogCount(
-    key: string,
-    now: number,
-    windowMs: number
-  ): { count: number; windowStart: number } {
-    let logCount = this.logCounts.get(key);
-    if (!logCount || now - logCount.windowStart > windowMs) {
-      logCount = { count: 0, windowStart: now };
-      this.logCounts.set(key, logCount);
-    }
-    return logCount;
-  }
-
-  /**
    * Determines if a log entry passes rate-based sampling.
    * @returns True if the log passes rate sampling, false otherwise.
    */
   private passesRateSampling(): boolean {
     if (!this.sampling?.rate) {
-      return true; // No sampling = allow all logs
+      return true;
     }
     // eslint-disable-next-line sonarjs/pseudo-random
     return Math.random() <= this.sampling.rate;
@@ -237,5 +223,25 @@ export class FilteredLogger implements ILogger {
     if (this.shouldLog(level, message, metadata)) {
       logAction();
     }
+  }
+
+  /**
+   * Retrieves or initializes the log count for a given key and time window.
+   * @param key - The key representing the log level or category.
+   * @param now - The current timestamp.
+   * @param windowMs - The duration of the time window in milliseconds.
+   * @returns The log count object containing the count and window start time.
+   */
+  private getOrCreateLogCount(
+    key: string,
+    now: number,
+    windowMs: number
+  ): { count: number; windowStart: number } {
+    let logCount = this.logCounts.get(key);
+    if (!logCount || now - logCount.windowStart > windowMs) {
+      logCount = { count: 0, windowStart: now };
+      this.logCounts.set(key, logCount);
+    }
+    return logCount;
   }
 }

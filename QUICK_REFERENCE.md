@@ -9,7 +9,7 @@ This is a quick reference for common tasks in this TypeScript template.
 | `yarn install`  | Install all dependencies     |
 | `yarn test`     | Run tests with coverage      |
 | `yarn lint`     | Check code style and quality |
-| `yarn lint:fix` | Auto-fix linting issues      |
+| `yarn lint:fix` | Autofix linting issues       |
 | `yarn package`  | Build production bundle      |
 | `yarn all`      | Run complete pipeline        |
 
@@ -24,7 +24,7 @@ This is a quick reference for common tasks in this TypeScript template.
 
 ### Optional Updates
 
-- [ ] `eslint.config.mjs` - Adjust linting rules
+- [ ] `eslint.config.mjs` - Adjust linter rules
 - [ ] `.prettierrc.yml` - Modify formatting preferences
 - [ ] `tsconfig.json` - Change TypeScript settings
 - [ ] `jest.config.cjs` - Adjust test configuration
@@ -215,7 +215,7 @@ yarn test --clearCache
 yarn test
 ```
 
-### Linting Errors
+### Linting errors
 
 ```bash
 # Auto-fix what's possible
@@ -268,7 +268,7 @@ yarn package
 ## 🆘 Getting Help
 
 - Check [Issues](https://github.com/Coderrob/typescript-template/issues)
-- Read the [Full README](./README.md)
+- Read the [Full readme](./README.md)
 - Review example code in `src/`
 - Check configuration files for examples
 

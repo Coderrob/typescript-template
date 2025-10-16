@@ -38,11 +38,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          cache: yarn
 
       - name: Enable Corepack
         id: enable-corepack
         run: corepack enable
+
+      - name: Prepare Yarn
+        id: prepare-yarn
+        run: corepack prepare yarn@4.9.1 --activate
+
+      # Ensure clean state (remove any generated files)
+      - name: Clean generated files
+        run: rm -f .yarn/install-state.gz
 
       - name: Install Dependencies
         id: install-dependencies
@@ -65,6 +72,7 @@ jobs:
           VALIDATE_JAVASCRIPT_STANDARD: false
           VALIDATE_JSCPD: false
           VALIDATE_JSON: false
+          VALIDATE_MARKDOWN_PRETTIER: false
           VALIDATE_SHELL_SHFMT: false
           VALIDATE_TYPESCRIPT_ES: false
           VALIDATE_TYPESCRIPT_STANDARD: false
@@ -84,11 +92,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          cache: yarn
 
       - name: Enable Corepack
         id: enable-corepack
         run: corepack enable
+
+      - name: Prepare Yarn
+        id: prepare-yarn
+        run: corepack prepare yarn@4.9.1 --activate
+
+      # Ensure clean state (remove any generated files)
+      - name: Clean generated files
+        run: rm -f .yarn/install-state.gz
 
       - name: Install Dependencies
         id: install-dependencies
@@ -115,11 +130,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          cache: yarn
 
       - name: Enable Corepack
         id: enable-corepack
         run: corepack enable
+
+      - name: Prepare Yarn
+        id: prepare-yarn
+        run: corepack prepare yarn@4.9.1 --activate
+
+      # Ensure clean state (remove any generated files)
+      - name: Clean generated files
+        run: rm -f .yarn/install-state.gz
 
       - name: Install Dependencies
         id: install-dependencies

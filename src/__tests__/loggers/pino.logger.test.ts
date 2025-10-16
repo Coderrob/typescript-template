@@ -15,10 +15,14 @@
  *
  */
 
-import { LogLevel, PinoLogger } from '../logging/index.js';
+import { LogLevel, PinoLogger } from '../../logging/index.js';
 
 describe('PinoLogger', () => {
   let logger: PinoLogger;
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   beforeEach(() => {
     logger = new PinoLogger({

@@ -1,14 +1,10 @@
 # Contributing to TypeScript Template
 
-Thank you for considering contributing to this TypeScript template! This
-document provides guidelines for contributing improvements to the template
-itself.
+Thank you for considering contributing to this TypeScript template! This document provides guidelines for contributing improvements to the template itself.
 
 ## 🎯 About This Template
 
-This is a **template repository** designed to help developers quickly start
-TypeScript projects with best practices built-in. Contributions should focus on
-improving the template's quality, usability, and maintainability.
+This is a **template repository** designed to help developers quickly start TypeScript projects with best practices built-in. Contributions should focus on improving the template's quality, usability, and maintainability.
 
 ## 🤝 How to Contribute
 
@@ -17,8 +13,8 @@ improving the template's quality, usability, and maintainability.
 Found a problem? Please open an issue:
 
 1. Check if the issue already exists
-2. Use a clear, descriptive title
-3. Provide detailed information:
+1. Use a clear, descriptive title
+1. Provide detailed information:
    - What you expected to happen
    - What actually happened
    - Steps to reproduce
@@ -29,33 +25,33 @@ Found a problem? Please open an issue:
 Have an idea for improvement?
 
 1. Open an issue with the label `enhancement`
-2. Clearly describe the enhancement
-3. Explain why it would be useful
-4. Provide examples if applicable
+1. Clearly describe the enhancement
+1. Explain why it would be useful
+1. Provide examples if applicable
 
 ### Pull Requests
 
 Ready to contribute code?
 
 1. **Fork the repository**
-2. **Create a feature branch**:
+1. **Create a feature branch**:
 
    ```bash
    git checkout -b feature/your-feature-name
    ```
 
-3. **Make your changes**:
+1. **Make your changes**:
    - Follow the existing code style
    - Update documentation as needed
    - Add tests if applicable
 
-4. **Test your changes**:
+1. **Test your changes**:
 
    ```bash
    yarn all
    ```
 
-5. **Commit your changes**:
+1. **Commit your changes**:
 
    ```bash
    git commit -m "feat: add awesome feature"
@@ -63,20 +59,20 @@ Ready to contribute code?
 
    Use [Conventional Commits](https://www.conventionalcommits.org/) format:
    - `feat:` - New features
-   - `fix:` - Bug fixes
+   - `fix:` - bugfixes
    - `docs:` - Documentation changes
    - `style:` - Code style changes (formatting, etc.)
    - `refactor:` - Code refactoring
    - `test:` - Adding or updating tests
    - `chore:` - Maintenance tasks
 
-6. **Push to your fork**:
+1. **Push to your fork**:
 
    ```bash
    git push origin feature/your-feature-name
    ```
 
-7. **Open a Pull Request**
+1. **Open a Pull Request**
 
 ## 📋 Development Guidelines
 
@@ -109,17 +105,17 @@ Ready to contribute code?
    - More examples
    - Better troubleshooting guides
 
-2. **Tool Configuration**
+1. **Tool Configuration**
    - Better default configurations
    - More useful ESLint rules
    - Improved build optimization
 
-3. **Developer Experience**
-   - Better VS Code integration
+1. **Developer Experience**
+   - Better Visual Studio Code integration
    - Improved scripts
    - More helpful error messages
 
-4. **Examples**
+1. **Examples**
    - Additional starter templates
    - Common patterns
    - Best practices demonstrations
@@ -147,9 +143,9 @@ Before submitting a PR, ensure:
 ## 🔍 Review Process
 
 1. A maintainer will review your PR
-2. They may request changes or ask questions
-3. Address feedback and update your PR
-4. Once approved, a maintainer will merge
+1. They may request changes or ask questions
+1. Address feedback and update your PR
+1. Once approved, a maintainer will merge
 
 ## 🏗️ Project Structure
 
@@ -186,7 +182,7 @@ improve.
 
 ## 🙏 Recognition
 
-Contributors will be recognized in the README and release notes.
+Contributors will be recognized in the readme and release notes.
 
 ---
 

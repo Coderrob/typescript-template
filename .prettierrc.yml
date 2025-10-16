@@ -7,7 +7,7 @@ endOfLine: lf
 htmlWhitespaceSensitivity: css
 jsxSingleQuote: false
 printWidth: 80
-proseWrap: always
+proseWrap: preserve
 quoteProps: as-needed
 semi: true
 singleQuote: true

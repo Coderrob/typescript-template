@@ -21,7 +21,6 @@ import { PinoLogger } from '../pino/logger.js';
 import { LogLevel } from '../types.js';
 
 import { CompositeLogger } from './composite.js';
-import { CoreLogger } from './core.js';
 
 /**
  * Factory function to create a CompositeLogger with CoreLogger and PinoLogger.
@@ -31,9 +30,8 @@ import { CoreLogger } from './core.js';
 export function createCompositeLogger(
   pinoOptions?: pino.LoggerOptions
 ): CompositeLogger {
-  const coreLogger = new CoreLogger();
   const pinoLogger = new PinoLogger(pinoOptions);
-  return new CompositeLogger([coreLogger, pinoLogger]);
+  return new CompositeLogger([pinoLogger]);
 }
 
 /**
@@ -49,20 +47,35 @@ export function createCompositeLogger(
 export function createPinoLogger(): PinoLogger {
   return new PinoLogger({
     level: process.env.LOG_LEVEL || LogLevel.INFO,
-    transport:
-      process.env.NODE_ENV !== 'production'
-        ? {
-            target: 'pino-pretty',
-            options: {
-              colorize: true,
-              translateTime: 'yyyy-mm-dd HH:MM:ss',
-              ignore: 'pid,hostname'
-            }
-          }
-        : undefined,
-    base: {
-      service: 'github-action',
-      version: process.env.npm_package_version || '1.0.0'
-    }
+    transport: getDefaultTransport(),
+    base: getDefaultBase()
   });
+}
+
+/**
+ * Get the default transport configuration based on environment
+ * @returns Transport options for development, undefined for production
+ */
+function getDefaultTransport() {
+  return process.env.NODE_ENV !== 'production'
+    ? {
+        target: 'pino-pretty',
+        options: {
+          colorize: true,
+          translateTime: 'yyyy-mm-dd HH:MM:ss',
+          ignore: 'pid,hostname'
+        }
+      }
+    : undefined;
+}
+
+/**
+ * Get the default base configuration
+ * @returns Base metadata including service name and version
+ */
+function getDefaultBase() {
+  return {
+    service: 'github-action',
+    version: process.env.npm_package_version || '1.0.0'
+  };
 }

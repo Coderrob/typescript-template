@@ -54,7 +54,7 @@ project.
 - [ ] Adjust Node.js versions to test against
 - [ ] Add deployment steps if needed
 - [ ] Configure secrets in repository settings
-- [ ] Add status badge to README
+- [ ] Add status badge to readme
 
 ### Development Tools
 
@@ -70,7 +70,7 @@ project.
 - [ ] Update duplication threshold in `.jscpd.json`
 - [ ] Configure coverage thresholds in `jest.config.cjs`
 
-### VS Code Settings
+### Visual Studio Code Settings
 
 - [ ] Review `.vscode/settings.json`
 - [ ] Update recommended extensions in `.vscode/extensions.json`
@@ -109,13 +109,13 @@ After customization, you may want to delete:
 - [ ] Run `yarn test` - all tests pass
 - [ ] Run `yarn quality` - no quality issues
 - [ ] Run `yarn package` - build succeeds
-- [ ] Verify git ignores `node_modules/`, `dist/`, `coverage/`
+- [ ] Verify Git ignores `node_modules/`, `dist/`, `coverage/`
 
 ### Repository Setup
 
 - [ ] Push initial changes to your repository
 - [ ] Verify CI/CD workflow runs successfully
-- [ ] Check that badges in README display correctly
+- [ ] Check that badges in readme display correctly
 - [ ] Test cloning and setup on a fresh machine/environment
 
 ## 📝 Documentation Updates

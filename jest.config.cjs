@@ -29,14 +29,14 @@ module.exports = {
   },
   preset: 'ts-jest',
   reporters: ['default'],
-  setupFilesAfterEnv: [],
+  setupFilesAfterEnv: ['<rootDir>/src/__tests__/jest.setup.ts'],
   testEnvironment: 'node',
   testMatch: ['**/*.test.ts', '**/*.test.js'],
   testPathIgnorePatterns: ['/dist/', '/node_modules/', '/__mocks__/'],
   transform: {
     '^.+\\.ts$': [
       'ts-jest',
-      { tsconfig: 'tsconfig.test.json', useESM: true, injectGlobals: true }
+      { tsconfig: 'tsconfig.test.json', useESM: false, injectGlobals: true }
     ]
   },
   transformIgnorePatterns: [

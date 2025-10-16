@@ -19,7 +19,6 @@ typescript-template/
 ├── coverage/             # Test coverage reports (lcov, html)
 ├── dist/                 # Built distribution files
 ├── script/               # Build and maintenance scripts
-│   ├── copyright.sh      # Copyright header management
 │   └── release.sh        # Release automation
 ├── src/                  # Source code
 │   ├── index.ts          # Main entry point
