@@ -20,28 +20,17 @@ import {
   LoggerConfigResolver,
   LogLevel
 } from '../../logging/index.js';
+import type { IEnvironmentVariables } from '../../types/env.js';
 
 describe('LoggerConfigResolver', () => {
-  const originalEnv = process.env;
-
-  beforeEach(() => {
-    // Reset environment
-    process.env = { ...originalEnv };
-  });
-
-  afterEach(() => {
-    // Restore original environment
-    process.env = originalEnv;
-    jest.clearAllMocks();
-  });
-
   describe('resolve', () => {
     it('should resolve default configuration for development', () => {
-      delete process.env.GITHUB_ACTIONS;
-      process.env.NODE_ENV = 'development';
-      process.env.npm_package_version = '1.0.0';
+      const mockEnv: IEnvironmentVariables = {
+        NODE_ENV: 'development',
+        npm_package_version: '1.0.0'
+      };
 
-      const config = LoggerConfigResolver.resolve();
+      const config = LoggerConfigResolver.resolve({}, mockEnv);
 
       expect(config.level).toBe(LogLevel.INFO);
       expect(config.prettyPrint).toBe(true);
@@ -52,16 +41,18 @@ describe('LoggerConfigResolver', () => {
     });
 
     it('should resolve configuration for CI environment', () => {
-      process.env.NODE_ENV = 'production';
-      process.env.GITHUB_ACTIONS = 'true';
-      process.env.GITHUB_REPOSITORY = 'owner/repo';
-      process.env.GITHUB_WORKFLOW = 'CI';
-      process.env.GITHUB_RUN_ID = '123';
-      process.env.GITHUB_REF = 'refs/heads/main';
-      process.env.GITHUB_SHA = 'abc123';
-      process.env.npm_package_version = '1.0.0';
+      const mockEnv: IEnvironmentVariables = {
+        NODE_ENV: 'production',
+        GITHUB_ACTIONS: 'true',
+        GITHUB_REPOSITORY: 'owner/repo',
+        GITHUB_WORKFLOW: 'CI',
+        GITHUB_RUN_ID: '123',
+        GITHUB_REF: 'refs/heads/main',
+        GITHUB_SHA: 'abc123',
+        npm_package_version: '1.0.0'
+      };
 
-      const config = LoggerConfigResolver.resolve();
+      const config = LoggerConfigResolver.resolve({}, mockEnv);
 
       expect(config.enableCore).toBe(true);
       expect(config.base).toHaveProperty('repository', 'owner/repo');
@@ -72,10 +63,12 @@ describe('LoggerConfigResolver', () => {
     });
 
     it('should resolve production configuration', () => {
-      process.env.NODE_ENV = 'production';
-      process.env.LOG_FILE = '/tmp/app.log';
+      const mockEnv: IEnvironmentVariables = {
+        NODE_ENV: 'production',
+        LOG_FILE: '/tmp/app.log'
+      };
 
-      const config = LoggerConfigResolver.resolve();
+      const config = LoggerConfigResolver.resolve({}, mockEnv);
 
       expect(config.prettyPrint).toBe(false);
       expect(config.transport).toBeDefined();
@@ -83,13 +76,14 @@ describe('LoggerConfigResolver', () => {
     });
 
     it('should apply overrides', () => {
+      const mockEnv: IEnvironmentVariables = {};
       const overrides: Partial<IPinoLoggerConfig> = {
         level: LogLevel.DEBUG,
         enableCore: true,
         base: { custom: 'value' }
       };
 
-      const config = LoggerConfigResolver.resolve(overrides);
+      const config = LoggerConfigResolver.resolve(overrides, mockEnv);
 
       expect(config.level).toBe(LogLevel.DEBUG);
       expect(config.enableCore).toBe(true);
@@ -97,9 +91,11 @@ describe('LoggerConfigResolver', () => {
     });
 
     it('should respect LOG_LEVEL environment variable', () => {
-      process.env.LOG_LEVEL = LogLevel.WARNING;
+      const mockEnv: IEnvironmentVariables = {
+        LOG_LEVEL: LogLevel.WARNING
+      };
 
-      const config = LoggerConfigResolver.resolve();
+      const config = LoggerConfigResolver.resolve({}, mockEnv);
 
       expect(config.level).toBe(LogLevel.WARNING);
     });
@@ -160,17 +156,17 @@ describe('LoggerConfigResolver', () => {
   });
 
   describe('GitHub Actions environment', () => {
-    beforeEach(() => {
-      process.env.GITHUB_ACTIONS = 'true';
-      process.env.GITHUB_RUN_ID = '12345';
-      process.env.GITHUB_SHA = 'abc123';
-      process.env.GITHUB_REF = 'refs/heads/main';
-      process.env.GITHUB_REPOSITORY = 'owner/repo';
-      process.env.npm_package_version = '1.0.0';
-    });
-
     it('should resolve configuration for GitHub Actions environment', () => {
-      const config = LoggerConfigResolver.resolve();
+      const mockEnv: IEnvironmentVariables = {
+        GITHUB_ACTIONS: 'true',
+        GITHUB_RUN_ID: '12345',
+        GITHUB_SHA: 'abc123',
+        GITHUB_REF: 'refs/heads/main',
+        GITHUB_REPOSITORY: 'owner/repo',
+        npm_package_version: '1.0.0'
+      };
+
+      const config = LoggerConfigResolver.resolve({}, mockEnv);
 
       expect(config.level).toBe(LogLevel.INFO);
       expect(config.prettyPrint).toBe(false);
